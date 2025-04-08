@@ -6,9 +6,9 @@ A simple API that provides notifications/updates/news.
 
 This is a Simple Notification Application.
 
-- Goals
-Have a DevOps approach to streamlining the build and deploy of this app using Cloud Services. 
-
+## Goals
+- Have a DevOps approach to streamlining the build and deploy of this app using Cloud Services. 
+- Learn DevOps and try to build a CI/CD pipeline using this application
 
 
 ## Application & Deploy Information

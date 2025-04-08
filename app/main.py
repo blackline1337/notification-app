@@ -1,12 +1,16 @@
-from typing import Union
+from typing import Union, Annotated
 import os
 import configparser
 from datetime import datetime
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from generate import generate_config
+from db.models import get_session, Messages
+from sqlmodel import Session, select
 
 app = FastAPI()
 
+
+# Load configuration
 def load_configuration(config_file='secretkeys.conf'):
     # Load config file
     config = configparser.ConfigParser()
@@ -23,17 +27,22 @@ secret_path = config_data['api_path']
 api_key = config_data['api_key']
 
 
+
+SessionDep = Annotated[Session, Depends(get_session)]
+
+# Index route
 @app.get("/")
 def read_root():
     return {"Notifications": "App"}
 
-
+# notifications route
 @app.get("/notifications")
 def read_notifications():
     messages = "test"
     # access the mysql database to read available notifications and output in json
     return messages
 
+# add message route
 @app.post("/{secret_path}")
 def add_notifications():
     # if the api_key value matches to configuration file api key, submit the message to the database.

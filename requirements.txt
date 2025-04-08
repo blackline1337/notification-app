@@ -3,3 +3,4 @@ fastapi-cli==0.0.7
 uvicorn==0.34.0
 python-multipart==0.0.20
 sqlmodel==0.0.24
+pymysql==1.1.1
