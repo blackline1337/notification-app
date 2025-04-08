@@ -1,15 +1,6 @@
 services:
-  app:
-    container_name: notification-app
-    build: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/data
-    restart: unless-stopped
-    depends_on:
-      - db
 
+# We want to run the database first, that way we can see the output of the app last. 
   db:
     image: mysql:8.0
     container_name: notification-db
@@ -23,6 +14,16 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
+  app:
+    container_name: notification-app
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/data
+    restart: unless-stopped
+    depends_on:
+      - db
 
 volumes:
   mysql_data:
